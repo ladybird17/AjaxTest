@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>기존 sync방식 웹페이지</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+<script th:src="@{/js/jquery-3.5.1.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+</head>
+<body>
+	<h1>sync방식 웹페이지</h1>
+	
+	<form action="/sync/cal" method="GET">
+		<input type="text" name="num1" placeholder="첫번째 숫자를 입력하세요">
+		<input type="text" name="num2" placeholder="두번째 숫자를 입력하세요">
+		<button type="submit">확인</button>
+	</form>
+</body>
+</html>

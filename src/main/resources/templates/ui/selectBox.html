@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+<script src="/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script src="/js/popper.js" th:src="@{/js/popper.js}"></script>
+<script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#sel1").on("change", function(){
+			var result = $("#sel1 option:selected").val();
+			
+			var datas = {areaName: result};
+			
+			$.ajax({
+				url: "/ui/selectBox1",
+				type: "POST",
+				data: datas,
+				success: function(data){
+					var sel2 = $("#sel2"); //selectbox 선택
+					sel2.empty(); //지정한 태그의 하위 태그 모두 삭제
+					sel2.append("<option value=''>선택해주세요</option>")//태그 추가
+					
+					for (var i =0; i<data.length; i++){
+						sel2.append("<option>" + data[i].areaName + "</option>");
+					}
+				},
+				error: function(){
+					alert("ajax통신 오류");
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<header class="container">
+		<div class="jumbotron">
+			<h1>ajax를 사용하여 select box에 내용 추가하기</h1>
+		</div>
+	</header>
+	<div class="container">
+		<select class="form-control mb-2" id="sel1" name="sel1">
+			<option value="" selected>선택하세요</option>
+			<option value="서울">서울</option>
+			<option value="대전">대전</option>
+			<option value="대구">대구</option>
+			<option value="부산">부산</option>
+		</select>
+		<select class="form-control" id="sel2" name="sel2">
+			<option value="" selected>선택하세요</option>
+		</select>
+		
+	</div>
+</body>
+</html>

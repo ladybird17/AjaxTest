@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 방식 웹페이지</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+<script th:src="@{/js/jquery-3.5.1.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btnCal").on("click",function(){
+			
+			alert("실행 순서 1번");
+			
+			$.ajax({
+				url: "/async/ajaxTest", //접속할 서버 주소
+				type: "post", //데이터 전송 방식, GET/POST/PUT/DELETE
+				data: {num1:11, num2:22}, //실제 서버로 전송될 데이터
+				success: function(data){ //데이터 통신이 성공했을 경우 실행
+					alert("실행 순서 2번");
+					alert(data.result);
+					$("#h3Text").text(data.result);
+				},
+				error: function() { //데이터 통신이 실패했을 경우 실행
+					alert("ajax 통신 오류 발생");
+				}
+			});
+			
+			alert("실행 순서 3번");
+			
+			/*
+			AJAX 옵션은 0325 필기 참조
+			
+			*/
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+		<button id="btnCal" class="btn btn-primary">계산</button>
+		<h3 id="h3Text"></h3>
+		
+		<select class="form-control">
+			<option>서울</option>
+			<option>대전</option>
+			<option>대구</option>
+			<option>부산</option>
+		</select>
+	</div>
+</body>
+</html>
