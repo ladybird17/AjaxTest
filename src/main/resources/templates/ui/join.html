@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+<script src="/js/jquery-3.5.1.js" th:src="@{/js/jquery-3.5.1.js}"></script>
+<script src="/js/popper.js" th:src="@{/js/popper.js}"></script>
+<script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var addr1 = $("#addr1");
+		var addr2 = $("#addr2");
+		var addr3 = $("#addr3");
+		
+		//
+		$("#addr1").on("change", function(){
+			var areaName = $("#addr1 option:selected").val();
+			var arrLocal = local(areaName); //관할구 목록 가져오기
+			
+			//기존 관할구, 읍면동리 목록 제거
+			addr2.empty();
+			addr2.append("<option selected>구를 선택해주세요</option>");
+			addr3.empty();
+			addr3.append("<option selected>읍,면,동,리를 선택해주세요</option>");
+			
+			//받아온 관할 구 목록을 selectBox에 추가함
+			for(var i=0; i<arrLocal.length; i++){
+				addr2.append("<option>"+arrLocal[i]+"</option>");
+			}
+		});
+		
+		//관할 구 목록을 선택하면 읍면동리 목록을 업데이트
+		$("#addr2").on("change", function(){
+			var areaName = $("#addr2 option:selected").val();
+			var arrLocal = area(areaName); //읍면동리 목록 가져오기
+			
+			//기존 관할구, 읍면리 목록 리셋시켜줌
+			addr3.empty();
+			addr3.append("<option selected>읍,면,동,리를 선택해주세요</option>");
+			
+			for(var i=0; i<arrLocal.length; i++){
+				addr3.append("<option>"+arrLocal[i]+"</option>");
+			}
+		});
+		
+		//관할구 목록 가져오기
+		function local(area){
+			var local = [];
+			
+			if(area =="서울"){
+				local[0] = "강북구";
+				local[1] = "강서구";
+				local[2] = "강남구";
+			}
+			else if(area =="부산"){
+				local[0] = "동래구";
+				local[1] = "해운대구";
+				local[2] = "부산진구";
+			}
+			else if(area =="제주"){
+				local[0] = "제주시";
+				local[1] = "서귀포시";
+			}
+			
+			return local;
+		}
+		
+		function area(areaName){
+			area1 = [
+				["개포동","논현동","대치동"],
+				["미아동","번동","수유동"],
+				["가양동","개화동","공항동"]
+			];
+			area2 = [
+				["낙민동","명륜동","명장동"],
+				["반송동","반여동","석대동"],
+				["가야동","개금동","당감동"]
+			];
+			area3 = [
+				["건입동","구좌동","내도동"],
+				["강정동","남원동","대정동"]
+			];
+			
+			switch (areaName) {
+			case "강북구":
+				return area1[0];
+				break;
+			
+			case "강서구":
+				return area1[1];
+      			break;
+			      
+			case "강남구":
+				return area1[2];
+      			break;
+			      
+			case "동래구":
+				return area2[0];
+      			break;
+			      
+			case "해운대구":
+				return area2[1];
+      			break;
+			      
+			case "부산진구":
+				return area2[2];
+      			break;
+			      
+			case "제주시":
+				return area3[0];
+      			break;
+			      
+			case "서귀포시":
+				return area3[1];
+      			break;
+			}
+		}
+	});
+</script>
+</head>
+<body>
+	<header class="container">
+		<div class="jumbotron">
+			<h1>회원 가입 폼</h1>
+		</div>
+	</header>
+	<main class="container">
+		<section class="row">
+			<article class="col-sm-6 mx-auto">
+				<form>
+					<input class="form-control mb-4" type="text" name="userId" id="userId" placeholder="아이디를 입력하세요">
+					
+					<input class="form-control mb-4" type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요">
+					
+					<div class="form-group row container mx-0">
+						<input class="form-control col-sm-6" type="text" name="email1" id="email1" placeholder="이메일을 입력하세요">
+						<select class="form-control col-sm-6" name="email2" id="email2">
+							<option>@선택하세요</option>
+							<option>@gmail.com</option>
+							<option>@naver.com</option>
+							<option>@daum.net</option>
+							<option>@nate.com</option>
+							<option>@yahoo.com</option>
+						</select>
+					</div>
+
+					<input class="form-control mb-4" type="text" name="phone" id="phone" placeholder="폰번호를 입력하세요">
+					
+					<input class="form-control mb-4" type="text" name="tel" id="tel" placeholder="전화번호를 입력하세요">
+					
+					<select class="form-control mb-3" id="addr1">
+						<option selected>주소를 선택하세요</option>
+						<option>서울</option>
+						<option>부산</option>
+						<option>제주</option>
+					</select>
+					<select class="form-control mb-3" id="addr2">
+					
+					</select>
+					<select class="form-control" id="addr3">
+					
+					</select>
+				</form>
+			</article>
+		</section>
+	</main>
+</body>
+</html>

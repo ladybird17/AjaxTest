@@ -86,4 +86,10 @@ public class UIController {
 		 }
 		 return listArea;
 	 }
+	 
+	 @RequestMapping(value="/ui/join", method=RequestMethod.GET)
+	 public String joinPage() throws Exception {
+		 return "/ui/join";
+	 }
+	 
 }
