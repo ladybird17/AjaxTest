@@ -91,5 +91,5 @@ public class UIController {
 	 public String joinPage() throws Exception {
 		 return "/ui/join";
 	 }
-	 
+
 }
