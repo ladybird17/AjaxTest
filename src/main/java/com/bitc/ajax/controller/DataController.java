@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 //공공데이터 가져와서 사용하기
+
 @Controller
 public class DataController {
 	// 기본적으로 접속할 페이지
@@ -43,7 +45,7 @@ public class DataController {
 		//rest api의 주소
 		String endPoint = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/";
 		//요청할 명령어
-		String serviceFunc = "getPharmacyFullDown?";
+		String serviceFunc = "getParmacyFullDown?";
 		//키 명령어
 		String keyFunc = "serviceKey=";
 		//요청할 페이지
